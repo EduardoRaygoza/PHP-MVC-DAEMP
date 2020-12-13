@@ -22,11 +22,14 @@ class Entidad{
     }
 
     public function getAll(){
-        $query = $this->db->query("SELECT * FROM $this->table ORDER BY id DESC");
-        while($row = $query->fetch_object()){
-            $resultSet[] = $row;
+        $query = $this->db->query("SELECT * FROM ".$this->table." ORDER BY id DESC;");
+        if($query->num_rows > 0){
+            while($row = $query->fetch_object()){
+                $resultSet[] = $row;
+            }
+            return $resultSet;
         }
-        return $resultSet;
+        return array();
     }
 
     public function getByID($id){
