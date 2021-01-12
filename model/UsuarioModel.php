@@ -8,8 +8,8 @@ class UsuariosModel extends Modelo{
     }
      
     //Metodos de consulta
-    public function getUnUsuario(){
-        $query="SELECT * FROM usuarios WHERE email='eduardoraygoza@gmail.com'";
+    public function getUnUsuario($mail, $pass){
+        $query="SELECT * FROM usuarios WHERE email='".$mail."' AND password = '".$pass."';";
         $usuario=$this->ejecutarSql($query);
         return $usuario;
     }

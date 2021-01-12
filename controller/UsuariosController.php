@@ -6,6 +6,13 @@ class UsuariosController extends Controlador{
     }
 
     public function index(){
+        session_start();
+
+        if(!isset($_SESSION["id"])){
+            $this->redirect("Login", "Index");
+        }
+
+
         $user = new Usuario();
 
         //Conseguimos a todos los usuarios
@@ -37,7 +44,7 @@ class UsuariosController extends Controlador{
             $usuario=new Usuario();
             $usuario->deleteById($id);
         }
-        $this->redirect();
+        $this->redirect("Usuarios", "index");
     }
 
     public function hola(){
@@ -45,6 +52,13 @@ class UsuariosController extends Controlador{
         $usuarios=new UsuariosModel();
         $usu=$usuarios->getUnUsuario();
         var_dump($usu);
+    }
+
+    public function logout(){
+        session_start();
+        $_SESSION = array();
+        session_destroy();
+        $this->redirect("Login", "index");
     }
 }
 
